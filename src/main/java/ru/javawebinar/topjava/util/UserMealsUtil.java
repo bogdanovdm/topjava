@@ -9,7 +9,6 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class UserMealsUtil {
     public static void main(String[] args) {
@@ -29,6 +28,7 @@ public class UserMealsUtil {
         System.out.println(filteredByStreams(meals, LocalTime.of(7, 0), LocalTime.of(12, 0), 2000));
     }
 
+    // Решение через перебор коллекций
     public static List<UserMealWithExcess> filteredByCycles(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
 
         List<UserMealWithExcess> result = new ArrayList<>();
@@ -47,6 +47,7 @@ public class UserMealsUtil {
         return result;
     }
 
+    // Решение через Stream API
     public static List<UserMealWithExcess> filteredByStreams(List<UserMeal> meals, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
 
         Map<LocalDate, Integer> daysCalories = meals.stream()
