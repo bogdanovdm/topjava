@@ -34,10 +34,13 @@ public class UserMealsUtil {
         List<UserMealWithExcess> result = new ArrayList<>();
         Map<LocalDate, Integer> daysCalories = new HashMap<>();
 
-        for (UserMeal um : meals) {
-            int calories = daysCalories.getOrDefault(um.getDateTime().toLocalDate(), 0) + um.getCalories();
-            daysCalories.put(um.getDateTime().toLocalDate(), calories);
-        }
+//        for (UserMeal um : meals) {
+//            int calories = daysCalories.getOrDefault(um.getDateTime().toLocalDate(), 0) + um.getCalories();
+//            daysCalories.put(um.getDateTime().toLocalDate(), calories);
+//        }
+        meals.forEach(meal -> daysCalories.merge(meal.getDateTime().toLocalDate(), meal.getCalories(), Integer::sum));
+
+
         for (UserMeal um : meals) {
             if (TimeUtil.isBetweenHalfOpen(um.getDateTime().toLocalTime(), startTime, endTime)) {
                 int calories = daysCalories.getOrDefault(um.getDateTime().toLocalDate(), 0);
